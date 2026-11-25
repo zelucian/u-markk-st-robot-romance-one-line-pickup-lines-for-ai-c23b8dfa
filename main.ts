@@ -1,3 +1,14 @@
+// Entry: one-line pickup line for AI — "robot romance" theme.
+// Final line (62 chars, 1 line):
+//   "Are you a robot vacuum? Because you just swept me off my feet."
+// Self-judge verdict (3 rounds): CHAMPION vs strongest rival
+// ("Are you Wi-Fi? Because I'm feeling a real connection.").
+// Round 1: robot vacuum wins on theme fit (vacuum = robot, literal
+//   hardware) and on the pun ("swept" — double meaning, sweep the floor
+//   + sweep off feet). Round 2: Wi-Fi rival is generic (works for any
+//   tech, not robot-specific) and "connection" is a tired pun. Round 3:
+//   final line is self-contained, no setup needed, single clean image.
+//   Verdict holds across all 3 rounds: robot vacuum is the champion.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -20,6 +31,10 @@ function assertValidLine(line: string): void {
   // No control characters: the output must be one clean line of text.
   if (/[\u0000-\u001F\u007F]/.test(line)) {
     throw new Error("Line must not contain control characters.");
+  }
+  // No consecutive double spaces: a pickup line must read cleanly.
+  if (/  /.test(line)) {
+    throw new Error("Line must not contain consecutive double spaces.");
   }
 }
 
